@@ -32,5 +32,8 @@ namespace Nota.Api.Entities
 
         [BsonElement("fechaFin")]
         public DateTime? FechaFin { get; set; }
+
+        [BsonElement("__v")]
+        public int Version { get; set; }
     }
 }

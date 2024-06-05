@@ -65,6 +65,8 @@ namespace Nota.Api.Controllers
             notaEntity.Estado = nota.Estado;
             notaEntity.Tags = nota.Tags;
             notaEntity.Contenido = nota.Contenido;
+            notaEntity.FechaFin = nota.FechaFin;
+            notaEntity.FechaInicio = nota.FechaInicio;
             await _notaRepositorio.ActualizarAsync(notaEntity);
 
             return Accepted(new { Mensaje = "Actualizado" });
