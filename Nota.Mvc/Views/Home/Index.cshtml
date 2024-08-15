@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Notas";
+}
+
+<div class="container">
+    <h2 class="text-info">Notas</h2>
+    <hr class="text-primary" />
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion-body">
+                        <div class="mb-3">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" id="nombre" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Contenido</label>
+                            <input type="text" class="form-control" id="contenido" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Tags</label>
+                            <input type="text" class="form-control" id="tags" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Estado</label>
+                            <select id="estado" class="form-select">
+                                <option value="">No aplica</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Fecha de inicio</label>
+                            <input type="date" class="form-control" id="fechaInicio" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Fecha de fin</label>
+                            <input type="date" class="form-control" id="fechaFin" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="enviarNota()">Guardar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* <div>
+        <div class="col-5 mb-3">
+            <div class="row">
+                <div class="col-2">
+                    <label class="form-label">Nombre</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="nombre" />
+                </div>
+            </div>
+        </div>
+    </div> *@
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th onclick="ordenarPor(nombre)">Nombre</th>
+                <th>tags</th>
+                <th>estado</th>
+                <th>contenido</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyDeNotas">
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script src="~/js/repositorio.js"></script>
+    <script>
+        window.onload = function () {
+            cargarLasNotas()
+        }
+    </script>
+}

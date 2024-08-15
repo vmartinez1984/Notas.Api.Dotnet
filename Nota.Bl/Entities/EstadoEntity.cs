@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace Nota.Api.Entities
+namespace Nota.Bl.Entities
 {
     public class EstadoEntity
     {
