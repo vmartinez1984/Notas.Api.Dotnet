@@ -33,7 +33,7 @@ async function pintarLasNotasAsync(json) {
         tr.appendChild(td)
         td.innerText = element.estado
 
-        if (element.estado == "url") {
+        if (element.estado.toLowerCase() == "url") {
             var td = document.createElement('td')
             var a = document.createElement('a')
             a.innerText = element.contenido.substring(0, 15) + "..."
