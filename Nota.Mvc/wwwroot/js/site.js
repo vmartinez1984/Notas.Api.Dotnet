@@ -2,7 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-var notas;
+var notas
+var notasFiltradas
 var notaId = ''
 function saludar() {
     console.log('Hola mundo');
@@ -71,7 +72,7 @@ async function pintarLasNotasAsync(json) {
 function editar(id) {
     //console.log(id)
     notaId = id
-    const index = notas.findIndex(x=> x.id == id)
+    const index = notas.findIndex(x => x.id == id)
     const nota = notas[index]
     document.getElementById('nombre').value = nota.nombre
     document.getElementById('contenido').value = nota.contenido
@@ -90,6 +91,7 @@ function editar(id) {
 async function copiar(texto) {
     await navigator.clipboard.writeText(texto)
 }
+
 async function pintarLosOptionsAsync(json) {
     json.forEach(item => {
         var option = document.createElement('option')
@@ -110,12 +112,12 @@ async function enviarNota() {
         "fechaFin": document.getElementById('fechaFin').value == "" ? null : document.getElementById('fechaFin').value,
     }
     if (notaId == '') {
-    // Guardar nota
-    const data = await agregarNotaAsync(nota)
-    nota.id = data.id;
-    console.log(nota)
-    notas.unshift(nota)
-    //fin guardar nota
+        // Guardar nota
+        const data = await agregarNotaAsync(nota)
+        nota.id = data.id;
+        console.log(nota)
+        notas.unshift(nota)
+        //fin guardar nota
     } else {
         nota.id = notaId
         await actualizarNotaAsync(nota)
@@ -129,13 +131,44 @@ async function enviarNota() {
 
 async function cargarLasNotas() {
     try {
-        notas = await obtenerTodasLasNotasAsync()
-        await pintarLasNotasAsync(notas)
+        //debugger
         const estados = await obtenerTodasLosEstadosAsync()
         await pintarLosOptionsAsync(estados)
+        notas = await obtenerTodasLasNotasAsync()
+        notasFiltradas = notas
+        await pintarLasNotasAsync(notas)
+        //setTimeout(function () {
+        //    document.getElementById('botonDelModal').click()            
+        //}, 1)
+        //setTimeout(function () {            
+        //    document.getElementById('botonDeCerrarModal').click()
+        //}, 1)
     } catch (e) {
         console.log(e)
     }
+}
+
+function filtrar(data) {
+    //console.log(data.value)
+    //debugger
+    let busqueda = data.value
+    if (busqueda == '')
+        notasFiltradas = notas
+    else
+        notasFiltradas = notasFiltradas.filter(
+            item =>
+                item.nombre.toLowerCase().indexOf(busqueda.toLowerCase()) !== -1
+                ||
+                item.tags.toLowerCase().indexOf(busqueda.toLowerCase()) !== -1
+                ||
+                item.estado.toLowerCase().indexOf(busqueda.toLowerCase()) !== -1
+        )
+    pintarLasNotasAsync(notasFiltradas)
+}
+
+function limpiarFiltro() {
+    document.getElementById('textboxDeFiltro').value = ''
+    pintarLasNotasAsync(notas)
 }
 
 function cerrarModal() {

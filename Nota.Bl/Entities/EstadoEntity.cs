@@ -9,7 +9,7 @@ namespace Nota.Bl.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { get; set; }
 
-        [BsonElement("nombre")]
+        //[BsonElement("nombre")]
         public string Nombre { get; set; }
     }
 }

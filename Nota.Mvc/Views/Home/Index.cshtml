@@ -6,7 +6,7 @@
     <h2 class="text-info">Notas</h2>
     <hr class="text-primary" />
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="botonDelModal">
         Agregar
     </button>
 
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonDeCerrarModal">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="enviarNota()">Guardar</button>
 
                 </div>
@@ -57,19 +57,14 @@
         </div>
     </div>
 
-    @* <div>
-        <div class="col-5 mb-3">
-            <div class="row">
-                <div class="col-2">
-                    <label class="form-label">Nombre</label>
-                </div>
-                <div class="col-10">
-                    <input type="text" class="form-control" id="nombre" />
-                </div>
-            </div>
+    <div class="row m-3">
+        <div class="col-8">
+            <input class="form-control" onkeyup="filtrar(this)" id="textboxDeFiltro" />
         </div>
-    </div> *@
-
+        <div class="col-4">
+            <button onclick="limpiarFiltro()" class="btn btn-secondary">Limpiar filtro</button>
+        </div>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
